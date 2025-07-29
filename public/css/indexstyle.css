@@ -38,7 +38,7 @@ img {
 
 .get-started {
   padding: 0.5rem 1rem;
-  background-color: #555;
+  background-color: #4e7ba8;
   color: white;
   border: none;
   border-radius: 5px;
@@ -47,7 +47,7 @@ img {
 }
 
 .get-started:hover {
-  background-color: #333;
+  background-color: #1f2e50;
 }
 
 /* HERO SECTION */
@@ -121,58 +121,83 @@ img {
 
 /* FOOTER */
 .footer {
-  background-color: #f2f2f2;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
+  background-color: #023b74;
+  color: #ffffff;
+  padding: 1.5rem 1rem;
+  font-size: 0.85rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.footer-left h3 {
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1 1 180px;
+}
+
+.footer-title {
+  font-size: 1.2rem;
+  font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.footer-left p {
-  margin-bottom: 1rem;
+.footer-description {
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
 
-.footer-left .socials a {
-  margin-right: 1rem;
-  font-size: 1.2rem;
-  text-decoration: none;
-  color: #333;
-  transition: color 0.3s;
-}
-
-.footer-left .socials a:hover {
-  color: #555;
+.footer-heading {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
 }
 
 .footer-links {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.footer-links div {
-  min-width: 120px;
-}
-
-.footer-links h4 {
-  margin-bottom: 0.5rem;
-}
-
-.footer-links ul {
   list-style: none;
   padding: 0;
 }
 
 .footer-links li {
-  margin-bottom: 0.3rem;
-  font-size: 0.9rem;
-  color: #444;
+  margin-bottom: 5px;
 }
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-size: 0.85rem;
+}
+
+.footer-links a:hover {
+  color: #ccc;
+}
+
+.social-icons a {
+  font-size: 1rem;
+  margin-right: 8px;
+  color: #ffffff;
+  transition: color 0.2s;
+}
+
+.social-icons a:hover {
+  color: #aaa;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  border-top: 1px solid #4e7ba8;
+  padding-top: 0.8rem;
+}
+
 
 /* ANIMATIONS */
 @keyframes fadeInLeft {

@@ -19,55 +19,50 @@
         <p>Securely share your files with anyone, anywhere.</p>
         <p>Upload large projects, code files, or private documents and share them safely with a key.</p>
     </div>
+<div class="hero-upload-box">
+    <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <label for="file">Choose a file to upload</label>
+        <input type="file" name="file" id="file" required>
 
-    <div class="hero-upload-box">
-        <form action="#" method="POST" enctype="multipart/form-data">
-            @csrf
-            <label for="file">Choose a file to upload</label>
-            <input type="file" name="file" id="file" required>
-            <button type="submit">Upload</button>
-        </form>
-    </div>
+        <label for="comment">Comment:</label>
+        <textarea name="comment" id="comment" rows="3" placeholder="Write your comment here..."></textarea>
+
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
 </div>
 
 
 <div class="category-section">
 
 <div class="category-tabs">
-  <a href="#">All</a>
-  <a href="#">Doc Files</a>
-  <a href="#">Images</a>
+ <div class="category-tabs">
+  <a href="{{ route('dashboard') }}" class="{{ request('category') == null ? 'active' : '' }}">All</a>
+  <a href="{{ route('dashboard', ['category' => 'docs']) }}" class="{{ request('category') == 'docs' ? 'active' : '' }}">Doc Files</a>
+  <a href="{{ route('dashboard', ['category' => 'images']) }}" class="{{ request('category') == 'images' ? 'active' : '' }}">Images</a>
+</div>
+
 
 </div>
 <div class="document-list">
-      <div class="document-card">
-        <h3><img src="" alt=""></h3>
-        <p>Uploaded by:Sommy</p>
-        <a href="" target="_blank">View</a>
-
-      </div>
-
-      <div class="document-card">
-        <h3><img src="" alt=""></h3>
-        <p>Uploaded by:Sommy</p>
-        <a href="" download>Download</a>
-      </div>
-
-
-      <div class="document-card">
-        <h3><img src="" alt=""></h3>
-        <p>Uploaded by:Sommy</p>
-        <a href="" target="_blank">View</a>
-
-      </div>
-
-      <div class="document-card">
-        <h3><img src="" alt=""></h3>
-        <p>Uploaded by:Sommy</p>
-        <a href="" download>Download</a>
-      </div>
-
-  </div>
+    @forelse($files as $file)
+    <div class="document-card">
+        <h3>
+            @if(Str::startsWith($file->mime_type, 'image/'))
+                <img src="{{ asset('storage/' . $file->path) }}" alt="{{ $file->filename }}" width="100">
+            @else
+                 {{ $file->filename }}
+            @endif
+         <p>Uploaded by: {{ $file->user->name }}</p>
+        <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank">View</a>
+        <a href="{{ asset('storage/' . $file->file_path) }}" download>Download</a>
+    </div>
+    @empty
+    <p>No files available in this category.</p>
+    @endforelse
+</div>
 
 </div>
 </div>

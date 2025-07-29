@@ -48,49 +48,56 @@
     <span>— Aguma-Ibrahim Ezedinim, Project Work</span>
   </section>
 
-  <footer class="footer">
-    <div class="footer-left">
-      <h3>FILESHAREHUB</h3>
-      <p>Secure file sharing platform</p>
-      <div class="socials">
-        <a href="#">🌐</a>
-        <a href="#">📧</a>
-      </div>
+  {{-- footer --}}
+    <footer class="footer">
+    <div class="footer-container">
+        <!-- Branding and short intro -->
+        <div class="footer-section">
+            <h2 class="footer-title">FileShare</h2>
+            <p class="footer-description">
+                A secure and collaborative platform for sharing large files, codebases, and projects. Built with developers, designers, and teams in mind.
+            </p>
+        </div>
+
+        <!-- Navigation links -->
+        <div class="footer-section">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li><a href="#">Upload Files</a></li>
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Outbox</a></li>
+                <li><a href="#">My Profile</a></li>
+            </ul>
+        </div>
+
+        <!-- Resources or support -->
+        <div class="footer-section">
+            <h3 class="footer-heading">Help & Support</h3>
+            <ul class="footer-links">
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Contact Support</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Report a Bug</a></li>
+            </ul>
+        </div>
+
+        <!-- Social media or credits -->
+        <div class="footer-section">
+            <h3 class="footer-heading">Connect</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-slack"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
     </div>
-    <div class="footer-links">
-      <div>
-        <h4>Product</h4>
-        <ul>
-          <li>Dashboard</li>
-          <li>Features</li>
-          <li>Integrations</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Pricing</h4>
-        <ul>
-          <li>Free version</li>
-          <li>Comparison</li>
-          <li>Enterprise</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li>About us</li>
-          <li>Careers</li>
-          <li>Updates</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Resources</h4>
-        <ul>
-          <li>Blog</li>
-          <li>Help Center</li>
-          <li>Support</li>
-        </ul>
-      </div>
+
+    <div class="footer-bottom">
+        <p>&copy; {{ date('Y') }} FileShare. All rights reserved.</p>
+        <p>Designed & Built by Your Team.</p>
     </div>
-  </footer>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>

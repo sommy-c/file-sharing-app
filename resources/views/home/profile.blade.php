@@ -8,14 +8,8 @@
 </head>
 <body>
 
-  <header class="top-nav">
-    <div class="brand">ShareEasy</div>
-    <nav class="nav-links">
-      <a href="#">Dashboard</a>
-      <a href="#">Inbox</a>
-      <a href="#">Outbox</a>
-    </nav>
-  </header>
+    @include('layouts.navigation')
+
 
   <main class="profile-page">
     <!-- Sidebar -->
@@ -83,16 +77,7 @@
       </div>
     </section>
   </main>
-
-  <footer class="footer">
-    <div>
-      <a href="#">Help</a>
-      <a href="#">Privacy Policy</a>
-    </div>
-    <div>
-      <a href="#">Terms of Service</a>
-    </div>
-  </footer>
+  {{-- @include('layouts.footer') --}}
 
 </body>
 </html>
