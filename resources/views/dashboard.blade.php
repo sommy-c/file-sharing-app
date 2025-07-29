@@ -35,11 +35,40 @@
 
 <div class="category-tabs">
   <a href="#">All</a>
-  <a href="#">Documents</a>
+  <a href="#">Doc Files</a>
   <a href="#">Images</a>
-  <a href="#">Code</a>
-  <a href="#">Projects</a>
+
 </div>
+<div class="document-list">
+      <div class="document-card">
+        <h3><img src="" alt=""></h3>
+        <p>Uploaded by:Sommy</p>
+        <a href="" target="_blank">View</a>
+
+      </div>
+
+      <div class="document-card">
+        <h3><img src="" alt=""></h3>
+        <p>Uploaded by:Sommy</p>
+        <a href="" download>Download</a>
+      </div>
+
+
+      <div class="document-card">
+        <h3><img src="" alt=""></h3>
+        <p>Uploaded by:Sommy</p>
+        <a href="" target="_blank">View</a>
+
+      </div>
+
+      <div class="document-card">
+        <h3><img src="" alt=""></h3>
+        <p>Uploaded by:Sommy</p>
+        <a href="" download>Download</a>
+      </div>
+
+  </div>
+
 </div>
 </div>
 
