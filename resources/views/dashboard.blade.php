@@ -9,6 +9,26 @@
 </head>
 <body>
    @include('layouts.navigation')
+   <div>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   @include('layouts.footer')
+
 
 </body>
 </html>
