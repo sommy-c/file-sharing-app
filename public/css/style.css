@@ -1,4 +1,14 @@
-nav {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+ align-items: center;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
+  nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,23 +46,20 @@ nav ul {
 
 nav ul li {
   display: inline;
+  color:  #0c0b0b;
 
 }
 
-nav ul li a i {
-  color:  #0c0b0b;
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-  text-decoration: none;
+nav ul li a {
+  color: #000000; /* solid black */
+  font-size: 1rem; /* adjust if needed */
+  transition: color 0.3s ease
 }
 
 nav ul li a:hover {
   color: #dcdcdc;
 }
-
-
-
-
+/* responsiveness for nav bar */
 
  @media (max-width: 768px) {
   nav {
@@ -60,5 +67,216 @@ nav ul li a:hover {
     align-items: flex-start;
   }
 
-
  }
+
+
+/* hero page */
+.hero-upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f9ff;
+  padding: 4rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin: 2rem auto;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.hero-message {
+  flex: 1 1 400px;
+  padding: 1rem;
+}
+
+.hero-message h1 {
+  font-size: 2.5rem;
+  color: #023b74;
+  margin-bottom: 1rem;
+}
+
+.hero-message p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.hero-upload-box {
+  flex: 1 1 300px;
+  max-width: 250px;
+  background-color: #023b74;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+.hero-upload-box input[type="file"] {
+  display: block;
+  margin-bottom: 0.2rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  width: 80%;
+}
+
+.hero-upload-box button {
+  background-color: #0356a0;
+  color: white;
+  padding: 0.2rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.hero-upload-box button:hover {
+  background-color: #dae6f0;
+    color: #023b74;
+}
+/* hero page responsiveness */
+@media (max-width: 768px) {
+
+}
+
+/* category tabb */
+.category-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.category-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-tabs a {
+  background-color: #023b74;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+}
+
+.category-tabs a.active {
+  background-color: #0c0b0b;
+}
+
+.category-tabs a:hover {
+  background-color: #045ca0;
+}
+/* category tabb responsiveness */
+@media (max-width: 768px) {
+  .category-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer */
+
+
+ .footer {
+    background-color: #023b74;
+    color: #ffffff;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 75rem;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1 1 20rem;
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    font-size: 1rem;
+    line-height: 1.6;
+
+}
+
+.footer-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #cccccc;
+}
+
+.social-icons a {
+    font-size: 1.4rem;
+    margin-right: 1rem;
+    color: #ffffff;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #aaaaaa;
+}
+
+.footer-bottom {
+    text-align: center;
+
+    font-size: 0.9rem;
+    border-top: 1px solid #4e7ba8;
+
+}
+
