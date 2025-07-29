@@ -22,7 +22,7 @@
 
                     @else
 
-                    <a href="{{url('register')}}"><button class="get-started">Get Started</button></a>
+                    <a href="{{url('/register')}}"><button class="get-started">Get Started</button></a>
 
                     @endauth
 
@@ -34,7 +34,9 @@
     <div class="hero-content">
       <h1>Share Files Easily &amp; Securely</h1>
       <p>Upload, manage, and share your files seamlessly</p>
-      <button class="join-btn">Join Now</button>
+        <a href="{{ Auth::check() ? route('dashboard') : route('login') }}">
+            <button class="join-btn">Join Now</button>
+        </a>
     </div>
     <div class="hero-image">
       <img src="{{asset('images/users-sharing-files-online-using-a-smartphone-app-vector-id1280291919.jpg')}}" alt="File Cloud Illustration" />
