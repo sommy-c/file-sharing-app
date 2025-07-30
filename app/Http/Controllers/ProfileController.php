@@ -81,7 +81,6 @@ class ProfileController extends Controller
 
 
 
-
 //       public function destroy(Request $request): RedirectResponse
 //     {
 //         $request->validateWithBag('userDeletion', [
