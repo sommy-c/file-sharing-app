@@ -53,7 +53,7 @@ class ProfileController extends Controller
 
 
 
-     public function showProfile()
+    public function showProfile()
     {
         return view('home.profile', ['user' => auth()->user()]);
     }

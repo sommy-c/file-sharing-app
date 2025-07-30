@@ -18,19 +18,19 @@
         <h1>Welcome to FileShare</h1>
         <p>Securely share your files with anyone, anywhere.</p>
         <p>Upload large projects, code files, or private documents and share them safely with a key.</p>
+
+        <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+            @csrf
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Upload</button>
+        </form>
     </div>
-<div class="hero-upload-box">
-    <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <label for="file">Choose a file to upload</label>
-        <input type="file" name="file" id="file" required>
 
-        <label for="comment">Comment:</label>
-        <textarea name="comment" id="comment" rows="3" placeholder="Write your comment here..."></textarea>
-
-        <button type="submit">Upload</button>
-    </form>
+    <div class="hero-image">
+        <img src="{{ asset('image/HERO.png') }}" alt="Lady using laptop">
+    </div>
 </div>
+
 
 </div>
 
@@ -45,24 +45,29 @@
 </div>
 
 
-</div>
-<div class="document-list">
+</div><div class="document-list">
     @forelse($files as $file)
-    <div class="document-card">
-        <h3>
-            @if(Str::startsWith($file->mime_type, 'image/'))
-                <img src="{{ asset('storage/' . $file->path) }}" alt="{{ $file->filename }}" width="100">
+        <div class="document-card">
+            <h3>
+                @if(Str::startsWith($file->type, 'image/'))
+                    <img src="{{ asset('storage/' . $file->path) }}" alt="{{ $file->filename }}" width="100">
+                @else
+                    {{ $file->filename }}
+                @endif
+            </h3>
+            <p>Uploaded by: {{ $file->user->name }}</p>
+
+            @if($file->downloaded)
+                <a href="{{ asset('storage/' . $file->path) }}" target="_blank">View</a>
             @else
-                 {{ $file->filename }}
+                <a href="{{ route('files.download', $file->id) }}">Download</a>
             @endif
-         <p>Uploaded by: {{ $file->user->name }}</p>
-        <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank">View</a>
-        <a href="{{ asset('storage/' . $file->file_path) }}" download>Download</a>
-    </div>
+        </div>
     @empty
-    <p>No files available in this category.</p>
+        <p>No files available in this category.</p>
     @endforelse
 </div>
+
 
 </div>
 </div>

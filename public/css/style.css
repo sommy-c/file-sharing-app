@@ -18,7 +18,7 @@ body {
   align-items: center;
   background-color: #023b74;
   color: white;
-  padding: 10px 20px;
+  padding: 18px 28px;
   border-radius: 6px;
 }
 
@@ -75,57 +75,7 @@ nav ul li a:hover {
 
 
 /* hero page */
-.hero-upload {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f5f9ff;
-  padding: 4rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  margin: 2rem auto;
-  max-width: 1200px;
-  flex-wrap: wrap;
-}
 
-.hero-message {
-  flex: 1 1 400px;
-  padding: 1rem;
-}
-
-.hero-message h1 {
-  font-size: 2.5rem;
-  color: #023b74;
-  margin-bottom: 1rem;
-}
-
-.hero-message p {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.hero-upload-box {
-  flex: 1 1 300px;
-  max-width: 250px;
-  background-color: #023b74;
-  padding: 1rem;
-  border-radius: 1rem;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-
-.hero-upload-box input[type="file"] {
-  display: block;
-  margin-bottom: 0.2rem;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  width: 80%;
-}
-/* Style for the comment label */
 .hero-upload-box label[for="comment"] {
   display: block;
   margin-top: 1rem;
@@ -136,7 +86,7 @@ nav ul li a:hover {
 /* Style for the textarea */
 .hero-upload-box textarea#comment {
   width: 100%;
-  min-height: 100px;
+  min-height: 10px;
   padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -167,9 +117,85 @@ nav ul li a:hover {
   background-color: #dae6f0;
     color: #023b74;
 }
-/* hero page responsiveness */
-@media (max-width: 768px) {
+.hero-upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 5%;
+    flex-wrap: wrap;
+    background: #f9f9f9;
+}
 
+.hero-message {
+    flex: 1 1 400px;
+    max-width: 600px;
+}
+
+.hero-message h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1e1e2f;
+}
+
+.hero-message p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.upload-form {
+    margin-top: 20px;
+}
+
+.upload-form input[type="file"] {
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.upload-form button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.upload-form button:hover {
+    background: #2563eb;
+}
+.upload-form {
+  flex: 1 1 300px;
+  max-width: 250px;
+  background-color: #023b74;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+.upload-form input[type="file"] {
+  display: block;
+  margin-bottom: 0.2rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  width: 80%;
+}
+
+.hero-image {
+    flex: 1 1 300px;
+    display: flex;
+    justify-content: center;
+    height: 500px;
+}
+
+.hero-image img {
+    max-width: 100%;
+
+    height: auto;
 }
 
 /* category tabb */
@@ -179,12 +205,14 @@ nav ul li a:hover {
   align-items: center;
   width: 100%;
 
+
 }
 .category-tabs {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
   margin-left: 3rem;
+   margin-top: 1rem;
 }
 
 .category-tabs a {
