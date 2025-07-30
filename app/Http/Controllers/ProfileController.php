@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Hash;
-use App\Models\File;
-
 
 class ProfileController extends Controller
 {
@@ -21,28 +18,10 @@ class ProfileController extends Controller
         return view('home.index');
     }
 
-     public function login_home(){
-        return view('home.index');
-    }
-
     public function showDashboard(Request $request)
     {
-
-
-    $category = $request->input('category');
-
-    $query = File::query();
-
-    if ($category) {
-        $query->where('category', $category);
+        return view('dashboard');
     }
-
-    $files = $query->latest()->get();
-
-    return view('dashboard', compact('files'));
-}
-
-
 
     public function profile(){
 
