@@ -45,7 +45,8 @@
 </div>
 
 
-</div><div class="document-list">
+</div>
+<div class="document-list">
     @forelse($files as $file)
         <div class="document-card">
             <h3>
@@ -60,7 +61,18 @@
             @if($file->downloaded)
                 <a href="{{ asset('storage/' . $file->path) }}" target="_blank">View</a>
             @else
-                <a href="{{ route('files.download', $file->id) }}">Download</a>
+                <form method="POST" action="{{ route('files.download',$file->id) }}">
+                    @csrf
+
+                    <input type="hidden" name="file_id" value=" {{ old('key') }}" ">
+
+                    <input type="text" name="encryption_key" placeholder="Enter encryption key" required>
+
+                    @error('encryption_key')
+            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+        @enderror
+                    <button type="submit">Download</button>
+                </form>
             @endif
         </div>
     @empty
@@ -68,6 +80,7 @@
     @endforelse
 </div>
 
+@include('layouts.footer')
 
 </div>
 </div>

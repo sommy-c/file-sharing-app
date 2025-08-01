@@ -20,6 +20,7 @@ return new class extends Migration
     $table->string('type')->nullable();
     $table->text('comment')->nullable();
     $table->text('encryption_key')->nullable(); // <-- for storing encrypted key
+    $table->boolean('downloaded')->default(false);
     $table->timestamps();
 
     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
