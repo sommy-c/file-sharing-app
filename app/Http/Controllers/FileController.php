@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\File;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -14,86 +14,109 @@ class FileController extends Controller
 {
     // ✅ Upload Encrypted File
     public function upload(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,rar,csv,mp4,mov,avi|max:20480',
-            'comment' => 'nullable|string|max:1000',
-        ]);
+{
+    $request->validate([
+        'receiver' => 'required|string',
+        'file' => 'required|file|max:20480',
+        'message' => 'nullable|string|max:1000',
+    ]);
 
-        $uploadedFile = $request->file('file');
-        $originalName = $uploadedFile->getClientOriginalName();
+    // Find user by username or email
+    $receiver = User::where('email', $request->receiver)
+                    ->orWhere('username', $request->receiver)
+                    ->first();
 
-        // 1. Generate 32-character encryption key
-        $encryptionKey = Str::random(32);
-
-        // 2. Encrypt file contents
-        $fileContent = file_get_contents($uploadedFile->getRealPath());
-        $iv = substr($encryptionKey, 0, 16); // 16 bytes IV
-        $encryptedContent = openssl_encrypt($fileContent, 'AES-256-CBC', $encryptionKey, 0, $iv);
-
-        // 3. Generate encrypted filename
-        $encryptedFileName = Str::random(20) . '.enc';
-
-        // 4. Store encrypted file
-        Storage::disk('local')->put("private/{$encryptedFileName}", $encryptedContent);
-
-        // 5. Save to DB
-        File::create([
-            'user_id' => Auth::id(),
-            'uploaded_by' => Auth::id(),
-            'filename' => $originalName,
-            'path' => "private/{$encryptedFileName}",
-            'type' => $uploadedFile->getClientMimeType(),
-            'comment' => $request->comment,
-            //  'encryption_key' => $encryptionKey
-           'encryption_key' => Crypt::encryptString($encryptionKey),
-        ]);
-
-        // 6. Send Message with Key
-        Message::create([
-            'sender_id' => Auth::id(),
-            'receiver_id' => Auth::id(),
-            'subject' => 'Decryption Key for Your Uploaded File',
-            'body' => "Your encryption key for the file `{$originalName}` is:\n\n`{$encryptionKey}`\n\nKeep it safe.",
-        ]);
-
-        return redirect()->route('dashboard')->with('success', 'File uploaded and key sent to your inbox!');
+    if (!$receiver) {
+        return back()->withErrors(['receiver' => 'User not found.']);
     }
 
+    $uploadedFile = $request->file('file');
+    $originalName = $uploadedFile->getClientOriginalName();
+
+    // Generate encryption key
+    $encryptionKey = Str::random(32);
+    $iv = substr($encryptionKey, 0, 16);
+
+    $encryptedContent = openssl_encrypt(
+        file_get_contents($uploadedFile->getRealPath()),
+        'AES-256-CBC',
+        $encryptionKey,
+        0,
+        $iv
+    );
+
+    $encryptedFileName = Str::random(20) . '.enc';
+    Storage::disk('local')->put("private/{$encryptedFileName}", $encryptedContent);
+
+    // Save to DB
+    $file = File::create([
+        'user_id' => Auth::id(),
+        'uploaded_by' => Auth::id(),
+        'filename' => $originalName,
+        'path' => "private/{$encryptedFileName}",
+        'type' => $uploadedFile->getMimeType(),
+        'encryption_key' => Crypt::encryptString($encryptionKey),
+        'comment' => $request->message,
+    ]);
+
+    // Send Message with Key
+    Message::create([
+        'sender_id' => Auth::id(),
+        'receiver_id' => $receiver->id,
+        'subject' => 'You received a file',
+        'body' => "File: `{$originalName}`\n\nEncryption Key: `{$encryptionKey}`\n\nNote: " . ($request->message ?? 'No additional message.'),
+    ]);
+
+    return redirect()->back()->with('success', 'File sent and uploaded successfully.');
+}
 
 
     //  Download Encrypted File
 
+
+
 public function download(Request $request, $id)
 {
-     $request->validate([
+    $file = File::findOrFail($id);
+    $user = Auth::user();
+
+    // If user is the uploader, skip key validation
+    if ($file->uploaded_by === $user->id) {
+        // Mark as downloaded if needed
+        if (!$file->downloaded) {
+            $file->downloaded = true;
+            $file->save();
+        }
+
+        return Storage::download($file->path, $file->filename);
+    }
+
+    // If receiver, require key
+    $request->validate([
         'encryption_key' => 'required|string',
     ]);
-    $file = File::findOrFail($id);
 
-    // Get the encryption key submitted from the form
     $providedKey = $request->input('encryption_key');
 
-    // Check if file exists
+    // Check file exists
     if (!Storage::disk('local')->exists($file->path)) {
         abort(404, 'File not found.');
     }
 
-    // Compare provided key with stored (decrypted) key
+    // Decrypt key and validate
     if ($providedKey !== Crypt::decryptString($file->encryption_key)) {
-       return back()->withErrors(['encryption_key' => 'Incorrect encryption key.'])->withInput();
-
+        return back()->withErrors(['key' => 'Incorrect encryption key.'])->withInput();
     }
 
-    // Mark as downloaded if not already
+    // Mark as downloaded
     if (!$file->downloaded) {
         $file->downloaded = true;
         $file->save();
     }
 
-    // Stream the encrypted file
-
+    return Storage::download($file->path, $file->filename);
 }
+
 
 
 
@@ -125,4 +148,27 @@ public function download(Request $request, $id)
 
     return view('inbox', compact('message', 'unreadcount'));
 }
+public function showFile($id)
+{
+    $file = File::findOrFail($id);
+
+    if (!$file->downloaded) {
+        abort(403, 'You must download this file first.');
+    }
+
+
+
+    return view('viewfile', compact('file'));
+}
+public function outbox()
+{
+    $messages = Message::where('sender_id', Auth::id())
+                ->latest()
+                ->with('receiver') // eager-load receiver user info
+                 ->paginate(10);
+
+    return view('outbox', compact('messages'));
+}
+
+
 }

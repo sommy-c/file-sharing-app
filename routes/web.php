@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/notification', [FileController::class, 'showNotification'])->name('notify');
     Route::get('/inbox/{id}', [FileController::class, 'showInbox'])->name('inbox.show');
+    Route::get('/viewfile/{id}', [FileController::class, 'showFile'])->name('files.view');
+    Route::get('/outbox', [FileController::class, 'outbox'])->name('messages.outbox');
+
+
 
 });
 

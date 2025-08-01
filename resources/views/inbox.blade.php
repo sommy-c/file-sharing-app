@@ -9,7 +9,8 @@
 </head>
 <body>
 @include('layouts.navigation')
-<div class="message-container fade-in">
+<div class="message-container fade-in {{ $message->sender_id == auth()->id() ? 'system-msg' : 'user-msg' }}">
+
     <div class="message-header">
         @if($message->sender && $message->sender->profile_photo)
             <img src="{{ asset('storage/' . $message->sender->profile_photo) }}" alt="Avatar" class="avatar">
@@ -20,18 +21,18 @@
         @endif
 
         <div class="sender-info">
-            <h2>{{ $message->subject }}</h2>
+            <h2 class="subject">{{ $message->subject }}</h2>
             <p><strong>From:</strong> {{ $message->sender->name ?? 'Unknown' }}</p>
-            <p><strong>Sent:</strong> {{ $message->created_at->format('F j, Y g:i A') }}</p>
+            <p class="timestamp">{{ $message->created_at->format('F j, Y g:i A') }}</p>
         </div>
     </div>
 
     <div class="message-body">
-        <p>{{ $message->body }}</p>
+        <p>{!! nl2br(e($message->body)) !!}</p>
     </div>
 
-
 </div>
+
 
 
 </div>

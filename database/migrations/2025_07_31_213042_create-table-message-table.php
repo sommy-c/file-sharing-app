@@ -22,6 +22,7 @@ return new class extends Migration
         $table->boolean('is_read')->default(false);
         $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
         $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+         $table->string('type')->default('user'); 
     });
 }
 

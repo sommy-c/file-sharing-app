@@ -34,7 +34,7 @@
             </a>
         </li>
 
-        <li><a href="#"><i class="fas fa-paper-plane"></i></a></li>
+        <li><a href="{{ route('messages.outbox') }}"><i class="fas fa-paper-plane"></i></a></li>
         <li><a href="#"><i class="fas fa-user-circle"></i></a></li>
     </ul>
 </nav>
