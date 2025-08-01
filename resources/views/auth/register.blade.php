@@ -43,7 +43,7 @@
                 <input type="password" name="password_confirmation" id="password_confirmation" required placeholder="••••••••">
             </div>
 
-            <button type="submit">Sign Up</button>
+            <a href="{{ route('profile.complete') }}"><button type="submit">Next</button></a>
             <p class="signup-link">Already have an account? <a href="{{ route('login') }}">Login</a></p>
         </form>
     </div>

@@ -19,7 +19,7 @@ class FileController extends Controller
 public function upload(Request $request)
 {
     $request->validate([
-        'file' => 'required|file|max:20480', // 20MB
+        'file' => 'required|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,rar,csv,mp4,mov,avi|max:20480',
         'comment' => 'nullable|string|max:1000',
     ]);
 
@@ -60,6 +60,27 @@ public function upload(Request $request)
 
     return redirect()->route('dashboard')->with('success', 'File uploaded and encryption key sent to your inbox!');
 }
+
+public function download($id)
+{
+    $file = File::findOrFail($id);
+
+    // Check if file exists
+    if (!Storage::disk('public')->exists($file->path)) {
+        abort(404, 'File not found.');
+    }
+
+    // Mark as downloaded
+    if (!$file->downloaded) {
+        $file->downloaded = true;
+        $file->save();
+    }
+
+    return Storage::disk('public')->download($file->path, $file->filename);
+}
+
+}
+
 
 public function showNotification()
 {
