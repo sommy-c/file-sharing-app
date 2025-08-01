@@ -10,21 +10,34 @@
 
 </head>
 <body>
-     <nav>
-        <header>
-            <h1>FILESHARE</h1>
-        </header>
+    <nav>
+    <header>
+        <h1>FILESHARE</h1>
+    </header>
 
-        <div>
-            <input type="text" name="search" placeholder="Search..." required>
-        </div>
+    <div>
+        <input type="text" name="search" placeholder="Search..." required>
+    </div>
 
-        <ul>
-            <li><a href="#"><i class="fas fa-inbox"></i></a></li>
-            <li><a href="#"><i class="fas fa-paper-plane"></i></a></li>
-            <li><a href="#"><i class="fas fa-user-circle"></i></a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li>
+            <a href="{{ route('notify') }}">
+                <i class="fas fa-inbox"></i>
+                @php
+                    $unreadCount = \App\Models\Message::where('receiver_id', auth()->id())
+                                    ->where('is_read', false)
+                                    ->count();
+                @endphp
+                @if($unreadCount > 0)
+                    <span class="notification-badge">{{ $unreadCount }}</span>
+                @endif
+            </a>
+        </li>
+
+        <li><a href="#"><i class="fas fa-paper-plane"></i></a></li>
+        <li><a href="#"><i class="fas fa-user-circle"></i></a></li>
+    </ul>
+</nav>
 
 </body>
 </html>

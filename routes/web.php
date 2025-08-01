@@ -18,9 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::post('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
     Route::post('/dashbord', [FileController::class, 'upload'])->name('files.upload');
+    Route::get('/notification', [FileController::class, 'showNotification'])->name('notify');
+    Route::get('/inbox/{id}', [FileController::class, 'showInbox'])->name('inbox.show');
 
 });
 
-require __DIR__.'/auth.php';
 
 

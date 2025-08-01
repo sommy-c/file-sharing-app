@@ -63,6 +63,22 @@ nav ul li a {
 nav ul li a:hover {
   color: #dcdcdc;
 }
+.notification-badge {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+ul li {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+}
+
 /* responsiveness for nav bar */
 
  @media (max-width: 768px) {
