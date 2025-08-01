@@ -16,6 +16,9 @@ Route::middleware('guest')->group(function () {
         ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::get('/complete-profile', [RegisteredUserController::class, 'showForm'])->name('profile.complete');
+Route::post('/complete-profile', [RegisteredUserController::class, 'store']);
+
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

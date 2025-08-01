@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
@@ -22,13 +22,27 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+
+    // Handle login
+    public function store(Request $request)
     {
-        $request->authenticate();
+        // Validate input
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $request->session()->regenerate();
+        // Attempt login
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // prevent session fixation
 
-        return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended('/dashboard'); // or your home page
+        }
+
+        // If login fails
+        throw ValidationException::withMessages([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**
